@@ -119,7 +119,7 @@ class SpamHamClassifier:
             self.class_priors = data.get('class_priors', {'spam': 0.15, 'ham': 0.85})
         print(f"Modelo cargado desde {model_path}")
     
-    def classify_text(self, text):
+    def clasificar_texto(self, text):
         if not self.model or not self.tfidf_vectorizer:
             raise ValueError("El modelo no ha sido entrenado o cargado")
         
@@ -168,7 +168,7 @@ class SpamHamClassifier:
             'top_spam_words': top_predictive_words
         }
 
-def classify_text_prompt(model_path="spam_ham_classifier.pkl"):
+def clasificar_prompt(model_path="spam_ham_classifier.pkl"):
     classifier = SpamHamClassifier()    
     try:
         classifier.load_model(model_path)
@@ -184,7 +184,7 @@ def classify_text_prompt(model_path="spam_ham_classifier.pkl"):
         if text.lower() == 'q':
             break
         
-        result = classifier.classify_text(text)
+        result = classifier.clasificar_texto(text)
         
         print("\n--- RESULTADOS DE CLASIFICACIÓN ---")
         print(f"Clasificación: {result['prediction'].upper()}")
@@ -200,4 +200,4 @@ def classify_text_prompt(model_path="spam_ham_classifier.pkl"):
     return result
 
 if __name__ == "__main__":
-    classify_text_prompt()
+    clasificar_prompt()
